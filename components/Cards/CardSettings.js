@@ -1,8 +1,23 @@
 import React from 'react';
-
-// components
+import { useFormik } from 'formik';
 
 export default function CardSettings() {
+  const formik = useFormik({
+    initialValues: {
+      username: '',
+      displayName: '',
+      password: '',
+      email: '',
+      aboutMe: '',
+      tiktok: '',
+      facebook: '',
+      twitter: '',
+    },
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
+
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-200 border-0">
@@ -12,7 +27,7 @@ export default function CardSettings() {
           </div>
         </div>
         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-          <form>
+          <form onSubmit={formik.handleSubmit}>
             <h6 className="text-gray-500 text-sm mt-3 mb-6 font-bold uppercase">
               User Information
             </h6>
@@ -21,14 +36,17 @@ export default function CardSettings() {
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
+                    htmlFor="username"
                   >
                     Username
                   </label>
                   <input
                     type="text"
+                    id="username"
+                    name="username"
+                    onChange={formik.handleChange}
+                    value={formik.values.username}
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="lucky.jesse"
                   />
                 </div>
               </div>
@@ -36,14 +54,17 @@ export default function CardSettings() {
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
+                    htmlFor="email"
                   >
                     Email address
                   </label>
                   <input
                     type="email"
+                    id="email"
+                    name="email"
+                    onChange={formik.handleChange}
+                    value={formik.values.email}
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="jesse@example.com"
                   />
                 </div>
               </div>
@@ -51,12 +72,16 @@ export default function CardSettings() {
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
+                    htmlFor="displayName"
                   >
                     Display Name
                   </label>
                   <input
                     type="text"
+                    id="displayName"
+                    name="displayName"
+                    onChange={formik.handleChange}
+                    value={formik.values.displayName}
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                     defaultValue="Lucky"
                   />
@@ -66,12 +91,16 @@ export default function CardSettings() {
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
+                    htmlFor="password"
                   >
                     Password
                   </label>
                   <input
                     type="password"
+                    id="password"
+                    name="password"
+                    onChange={formik.handleChange}
+                    value={formik.values.password}
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                     defaultValue="Jesse"
                   />
@@ -88,12 +117,16 @@ export default function CardSettings() {
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
+                    htmlFor="aboutMe"
                   >
                     About me
                   </label>
                   <textarea
                     type="text"
+                    id="aboutMe"
+                    name="aboutMe"
+                    onChange={formik.handleChange}
+                    value={formik.values.aboutMe}
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                     rows="4"
                     defaultValue="A beautiful UI Kit and Admin for NextJS & Tailwind CSS. It is Free
@@ -112,38 +145,47 @@ export default function CardSettings() {
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
+                    htmlFor="facebook"
                   >
                     Facebook
                   </label>
                   <input
-                    type="text"
+                    id="facebook"
+                    name="facebook"
+                    onChange={formik.handleChange}
+                    value={formik.values.facebook}
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="https://www.facebook.com/"
                   />
                 </div>
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
+                    htmlFor="instagram"
                   >
                     Instagram
                   </label>
                   <input
                     type="url"
+                    id="instagram"
+                    name="instagram"
+                    onChange={formik.handleChange}
+                    value={formik.values.instagram}
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="https://www.instagram.com/xalo.joy/"
                   />
                 </div>
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
+                    htmlFor="tiktok"
                   >
                     Tiktok
                   </label>
                   <input
                     type="url"
+                    id="tiktok"
+                    name="tiktok"
+                    onChange={formik.handleChange}
+                    value={formik.values.tiktok}
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                     defaultValue="https://www.tiktok.com/en"
                   />
@@ -151,14 +193,17 @@ export default function CardSettings() {
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
+                    htmlFor="twitter"
                   >
                     Twitter
                   </label>
                   <input
                     type="url"
+                    id="twitter"
+                    name="twitter"
+                    onChange={formik.handleChange}
+                    value={formik.values.twitter}
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                    defaultValue="https://twitter.com/?lang=en"
                   />
                 </div>
               </div>
@@ -166,10 +211,10 @@ export default function CardSettings() {
 
             <br />
             <div className="flex">
-              <div class="m-auto">
+              <div className="m-auto">
                 <button
                   className="bg-gray-800 active:bg-gray-700 text-white font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-                  type="button"
+                  type="submit"
                 >
                   Save
                 </button>

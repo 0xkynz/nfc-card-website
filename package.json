@@ -11,12 +11,17 @@
     "@tailwindcss/custom-forms": "0.2.1",
     "@zeit/next-css": "1.0.1",
     "@zeit/next-sass": "1.0.1",
+    "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
     "chart.js": "2.9.3",
     "formik": "^2.2.6",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.2.5",
     "next": "9.5.3",
     "next-compose-plugins": "2.2.0",
+    "next-connect": "^0.10.0",
     "next-fonts": "1.4.0",
     "next-images": "1.3.1",
     "node-sass": "4.14.1",
@@ -25,6 +30,7 @@
     "react-dom": "16.13.1",
     "react-google-maps": "9.4.5",
     "react-scripts": "3.4.3",
+    "sequelize": "^6.5.0",
     "tailwindcss": "1.8.10",
     "webpack": "4.44.2"
   },
@@ -61,6 +67,8 @@
     "eslint-config-prettier": "^6.13.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.21.5",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "sequelize-auto": "^0.8.0",
+    "sequelize-cli": "^6.2.0"
   }
 }

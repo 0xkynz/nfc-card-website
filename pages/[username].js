@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import React from 'react';
-
+import Footer from 'components/Footers/Footer.js';
 export default function Profile({ stars }) {
   return (
     <>
@@ -88,6 +88,7 @@ export default function Profile({ stars }) {
             </div>
           </div>
         </section>
+        <Footer></Footer>
       </main>
     </>
   );

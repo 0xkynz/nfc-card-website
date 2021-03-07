@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function FooterAdmin() {
   return (
@@ -9,17 +9,17 @@ export default function FooterAdmin() {
           <div className="flex flex-wrap items-center md:justify-between justify-center">
             <div className="w-full md:w-4/12 px-4">
               <div className="text-sm text-gray-600 font-semibold py-1 text-center md:text-left">
-                Copyright © {new Date().getFullYear()}{" "}
+                Copyright © {new Date().getFullYear()}{' '}
                 <a
-                  href="https://www.creative-tim.com?ref=nnjs-footer-admin"
+                  href="#"
                   className="text-gray-600 hover:text-gray-800 text-sm font-semibold py-1"
                 >
-                  Creative Tim
+                  YTeam
                 </a>
               </div>
             </div>
             <div className="w-full md:w-8/12 px-4">
-              <ul className="flex flex-wrap list-none md:justify-end  justify-center">
+              {/* <ul className="flex flex-wrap list-none md:justify-end  justify-center">
                 <li>
                   <a
                     href="https://www.creative-tim.com?ref=nnjs-footer-admin"
@@ -52,7 +52,7 @@ export default function FooterAdmin() {
                     MIT License
                   </a>
                 </li>
-              </ul>
+              </ul> */}
             </div>
           </div>
         </div>

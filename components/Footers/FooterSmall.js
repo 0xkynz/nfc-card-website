@@ -17,15 +17,15 @@ export default function FooterSmall(props) {
               <div className="text-sm text-gray-600 font-semibold py-1 text-center md:text-left">
                 Copyright © {new Date().getFullYear()}{" "}
                 <a
-                  href="https://www.creative-tim.com?ref=nnjs-footer-small"
+                  href="#"
                   className="text-white hover:text-gray-400 text-sm font-semibold py-1"
                 >
-                  Creative Tim
+                  YTeam
                 </a>
               </div>
             </div>
             <div className="w-full md:w-8/12 px-4">
-              <ul className="flex flex-wrap list-none md:justify-end  justify-center">
+              {/* <ul className="flex flex-wrap list-none md:justify-end  justify-center">
                 <li>
                   <a
                     href="https://www.creative-tim.com?ref=nnjs-footer-small"
@@ -58,7 +58,7 @@ export default function FooterSmall(props) {
                     MIT License
                   </a>
                 </li>
-              </ul>
+              </ul> */}
             </div>
           </div>
         </div>

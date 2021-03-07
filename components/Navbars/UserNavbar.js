@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import UserDropdown from "components/Dropdowns/UserDropdown.js";
+import UserDropdown from 'components/Dropdowns/UserDropdown.js';
 
 export default function Navbar() {
   return (
@@ -14,7 +14,7 @@ export default function Navbar() {
             href="#pablo"
             onClick={(e) => e.preventDefault()}
           >
-            VCard
+            VCard.Me
           </a>
           {/* User */}
           <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
