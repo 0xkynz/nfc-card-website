@@ -1,9 +1,7 @@
-import React from "react";
+/* eslint-disable no-undef */
+import React from 'react';
 
-import Navbar from "components/Navbars/AuthNavbar.js";
-import Footer from "components/Footers/Footer.js";
-
-export default function Profile() {
+export default function Profile({ stars }) {
   return (
     <>
       <main className="profile-page">
@@ -22,7 +20,7 @@ export default function Profile() {
           </div>
           <div
             className="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-16"
-            style={{ transform: "translateZ(0)" }}
+            style={{ transform: 'translateZ(0)' }}
           >
             <svg
               className="absolute bottom-0 overflow-hidden"
@@ -49,7 +47,7 @@ export default function Profile() {
                     <div className="relative">
                       <img
                         alt="..."
-                        src={require("assets/img/team-2-800x800.jpg")}
+                        src={require('assets/img/team-2-800x800.jpg')}
                         className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                       />
                     </div>
@@ -65,12 +63,11 @@ export default function Profile() {
                     </div>
                   </div>
                   <div className="w-full lg:w-4/12 px-4 lg:order-1">
-                    <div className="flex justify-center py-4 lg:pt-4 pt-8">
-                    </div>
+                    <div className="flex justify-center py-4 lg:pt-4 pt-8"></div>
                   </div>
                 </div>
                 <div className="text-center mt-12">
-                  <h3 className="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
+                  <h3 className="text-4xl font-semibold leading-normal mb-2 text-gray-800">
                     Jenna Stones
                   </h3>
                 </div>
@@ -95,3 +92,9 @@ export default function Profile() {
     </>
   );
 }
+
+Profile.getInitialProps = async () => {
+  const res = await fetch('https://api.github.com/repos/vercel/next.js');
+  const json = await res.json();
+  return { stars: json.stargazers_count };
+};
