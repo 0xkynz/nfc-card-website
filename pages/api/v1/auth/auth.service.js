@@ -1,18 +1,17 @@
 /* eslint-disable no-undef */
-import { Users } from '../../../../db/models';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 
-const KEY = process.env.JWT_KEY;
+import { Users, Cards } from '../../../../db/models';
+import { generateToken } from '../../../../utils/token';
 
-export const validate = async ({ email, password }) => {
+export const signin = async (email, password) => {
   if (!email || !password) {
     throw new Error('Request missing username or password');
   }
 
   /* Check user in database */
   const user = await Users.findOne({
-    where: { email: email },
+    where: { email },
     attributes: ['id', 'email', 'password'],
     limit: 1,
   });
@@ -31,17 +30,43 @@ export const validate = async ({ email, password }) => {
   if (isMatch) {
     /* User matched */
     /* Create JWT Payload */
-    const payload = {
-      id: userId,
-      email: userEmail,
-    };
-    /* Sign token */
-    const token = jwt.sign(payload, KEY, {
-      expiresIn: 31556926, // 1 year in seconds
-    });
+    const { token } = generateToken({ userId, userEmail });
 
     return {
-      token: 'Bearer ' + token,
+      token: token,
     };
   }
+
+  throw new Error('User Not Found');
+};
+
+export const signup = async (
+  username,
+  cardID,
+  { email, password, displayName }
+) => {
+  const card = await Cards.findByPk(cardID);
+  if (!card) {
+    throw new Error('Card does not exist');
+  }
+  const user = await Users.findOne({
+    where: { cardID },
+    limit: 1,
+  });
+  if (user) {
+    throw new Error('Card was used by other account');
+  }
+
+  const newUser = await Users.create({
+    username,
+    email,
+    password,
+    cardID,
+    displayName,
+  });
+
+  const { id: userId, email: userEmail } = newUser;
+  const { token } = await generateToken({ userId, userEmail });
+
+  return { token };
 };

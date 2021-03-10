@@ -1,7 +1,10 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { createPopper } from '@popperjs/core';
+import { removeToken } from '../../utils/auth';
 
 const UserDropdown = () => {
+  const router = useRouter();
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
@@ -15,6 +18,14 @@ const UserDropdown = () => {
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
+
+  const logout = (e) => {
+    e.preventDefault();
+
+    removeToken();
+    router.push('/auth/login');
+  };
+
   return (
     <>
       <a
@@ -48,7 +59,7 @@ const UserDropdown = () => {
           className={
             'text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800'
           }
-          onClick={(e) => e.preventDefault()}
+          onClick={logout}
         >
           Logout
         </a>

@@ -1,9 +1,29 @@
 import React from 'react';
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
+
+import { register } from '../../services/user';
+import { setToken } from '../../utils/auth';
 
 // layout for page
 
 import Auth from 'layouts/Auth.js';
+
+const registerSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid email').required('Email is required'),
+  username: Yup.string()
+    .matches(/^[A-Za-z0-9]*$/, 'Please enter valid username')
+    .min(4, 'Username must be at least 4 characters')
+    .max(40, 'Username must be at most 40 characters')
+    .required('Username is required'),
+  displayName: Yup.string().required('Display Name is required'),
+  cardID: Yup.string()
+    .matches(/^[A-Za-z0-9]*$/, 'Please enter valid Card ID')
+    .min(1)
+    .max(20)
+    .required('CardID is required'),
+  password: Yup.string().required('Password is required'),
+});
 
 export default function Register() {
   const formik = useFormik({
@@ -11,12 +31,24 @@ export default function Register() {
       email: '',
       username: '',
       password: '',
-      card_id: '',
+      cardID: '',
+      displayName: '',
     },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    validationSchema: registerSchema,
+    onSubmit: async (values) => {
+      register(values)
+        .then(({ data }) => {
+          const { token } = data;
+          setToken(token);
+          window.location.href = '/user/settings';
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
     },
   });
+
+  const { errors } = formik;
 
   return (
     <>
@@ -64,15 +96,32 @@ export default function Register() {
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                      htmlFor="card_id"
+                      htmlFor="displayName"
+                    >
+                      Display Name
+                    </label>
+                    <input
+                      type="text"
+                      name="displayName"
+                      onChange={formik.handleChange}
+                      value={formik.values.displayName}
+                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+                      placeholder="Display name"
+                    />
+                  </div>
+
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                      htmlFor="cardID"
                     >
                       Card ID
                     </label>
                     <input
                       type="text"
-                      name="card_id"
+                      name="cardID"
                       onChange={formik.handleChange}
-                      value={formik.values.card_id}
+                      value={formik.values.cardID}
                       className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
                       placeholder="Card ID"
                     />
@@ -94,6 +143,12 @@ export default function Register() {
                       placeholder="Password"
                     />
                   </div>
+
+                  {errors && Object.keys(errors).length > 0 && (
+                    <p className="text-red-500 text-xs">
+                      {errors[Object.keys(errors)[0]]}
+                    </p>
+                  )}
 
                   <div className="text-center mt-6">
                     <button

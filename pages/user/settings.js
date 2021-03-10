@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 
 // components
 
-import CardSettings from "components/Cards/CardSettings.js";
-import CardProfile from "components/Cards/CardProfile.js";
+import CardSettings from 'components/Cards/CardSettings.js';
+import withPrivateRoute from 'components/Auth/withPrivateRoute.js';
 
 // layout for page
 
-import User from "layouts/User.js";
+import User from 'layouts/User.js';
 
-export default function Settings() {
+const Settings = withPrivateRoute(() => {
   return (
     <>
       <div className="flex flex-wrap">
@@ -22,6 +22,7 @@ export default function Settings() {
       </div>
     </>
   );
-}
-
+});
 Settings.layout = User;
+
+export default Settings;

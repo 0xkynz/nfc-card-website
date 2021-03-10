@@ -1,20 +1,30 @@
 import nextConnect from 'next-connect';
-import { saveUser } from './user.service';
+import { updateUser, getUser } from './user.service';
+import middleware from '../../../../middleware/auth';
 
 const handler = nextConnect()
+  .use(middleware)
   .get((req, res) => {
-    res.json({ hello: 'world' });
-  })
-  .post((req, res) => {
-    const { body } = req;
-    const { username, email, password, cardID } = body;
+    const { id } = req.user;
 
-    saveUser({ username, email, password, cardID })
-      .then((newUser) => {
-        res.json({ user: newUser });
+    getUser(id)
+      .then((user) => {
+        res.status(200).json({ user });
       })
       .catch((err) => {
-        res.statusCode(400).json({ message: err.message });
+        res.status(400).json({ message: err.message });
+      });
+  })
+  .put((req, res) => {
+    const { body } = req;
+    const { id } = req.user;
+
+    updateUser(id, body)
+      .then(({ data }) => {
+        res.status(200).json({ user: data });
+      })
+      .catch((err) => {
+        res.status(400).json({ message: err.message });
       });
   });
 

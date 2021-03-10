@@ -1,5 +1,5 @@
 import nextConnect from 'next-connect';
-import { validate } from './auth.service';
+import { signin } from './auth.service';
 
 const handler = nextConnect()
   .get((req, res) => {
@@ -8,12 +8,12 @@ const handler = nextConnect()
   .post((req, res) => {
     const { email, password } = req.body;
 
-    validate(email, password)
+    signin(email, password)
       .then(({ token }) => {
         res.json({ token });
       })
       .catch((err) => {
-        res.statusCode(400).json({ message: err.message });
+        res.status(400).json({ message: err.message });
       });
   });
 

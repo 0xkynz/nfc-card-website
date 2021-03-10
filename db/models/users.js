@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const bcrypt = require('bcryptjs');
 
 module.exports = function (sequelize, DataTypes) {
@@ -27,7 +28,7 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: true,
       },
       aboutMe: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.TEXT,
         allowNull: true,
       },
       tiktok: {
@@ -42,8 +43,20 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.STRING(255),
         allowNull: true,
       },
-      card_id: {
+      instagram: {
         type: DataTypes.STRING(255),
+        allowNull: true,
+      },
+      cardID: {
+        type: DataTypes.STRING(255),
+        allowNull: true,
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
         allowNull: true,
       },
     },

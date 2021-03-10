@@ -1,24 +1,53 @@
-import { Users, Cards } from '../../../../db/models';
+import { Users } from '../../../../db/models';
 
-export const saveUser = async ({ username, email, password, cardID }) => {
-  const card = await Cards.findByPk(cardID);
-  if (!card) {
-    throw new Error('Card does not exist');
-  }
-  const user = await Users.findOne({
-    where: { card_id: cardID },
-    limit: 1,
-  });
-  if (user) {
-    throw new Error('Card was used by other account');
-  }
-
-  const newUser = await Users.create({
-    username,
-    email,
-    password,
-    card_id: cardID,
-  });
+export const updateUser = async (
+  id,
+  { email, displayName, aboutMe, tiktok, facebook, twitter, instagram }
+) => {
+  const newUser = await Users.update(
+    {
+      email,
+      displayName,
+      aboutMe,
+      tiktok,
+      facebook,
+      twitter,
+      instagram,
+    },
+    {
+      where: { id },
+    }
+  );
 
   return newUser;
+};
+
+export const getUser = async (id) => {
+  const user = await Users.findByPk(id);
+  if (!user) {
+    throw new Error("User doesn't exists");
+  }
+
+  return user;
+};
+
+export const getUserByUsername = async (username) => {
+  const user = await Users.findOne({
+    where: { username },
+    attributes: [
+      'username',
+      'displayName',
+      'tiktok',
+      'facebook',
+      'instagram',
+      'twitter',
+      'cardID',
+      'aboutMe',
+    ],
+  });
+  if (!user) {
+    throw new Error("User doesn't exists");
+  }
+
+  return user;
 };

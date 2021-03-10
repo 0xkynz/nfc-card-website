@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
 // components
 
-import FooterSmall from "components/Footers/FooterSmall.js";
+import FooterSmall from 'components/Footers/FooterSmall.js';
 
 export default function Auth({ children }) {
   return (
@@ -13,7 +13,7 @@ export default function Auth({ children }) {
             className="absolute top-0 w-full h-full bg-gray-900 bg-no-repeat bg-full"
             style={{
               backgroundImage:
-                "url(" + require("assets/img/register_bg_2.png") + ")",
+                'url(' + require('assets/img/register_bg_2.png') + ')',
             }}
           ></div>
           {children}
