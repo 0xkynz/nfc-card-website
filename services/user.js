@@ -30,6 +30,13 @@ export function getByUsername(username) {
   });
 }
 
+export function getByCardID(cardID) {
+  return request({
+    url: `/api/v1/user/card/${cardID}`,
+    method: 'get',
+  });
+}
+
 export function update(data) {
   return request({
     url: `/api/v1/user`,

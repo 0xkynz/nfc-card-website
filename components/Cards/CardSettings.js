@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Formik, Field, Form } from 'formik';
+import * as Yup from 'yup';
 
 import 'react-toastify/dist/ReactToastify.css';
 
 import * as userService from '../../services/user';
+
+const settingSchema = Yup.object().shape({
+  aboutMe: Yup.string().max(10000, 'Card ID must be at most 10000 characters'),
+});
 
 export default function CardSettings() {
   const initialValues = {
@@ -51,6 +56,7 @@ export default function CardSettings() {
             enableReinitialize={true}
             initialValues={user}
             onSubmit={onSubmit}
+            validationSchema={settingSchema}
           >
             {() => {
               return (

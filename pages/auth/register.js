@@ -16,12 +16,15 @@ const registerSchema = Yup.object().shape({
     .min(4, 'Username must be at least 4 characters')
     .max(40, 'Username must be at most 40 characters')
     .required('Username is required'),
-  displayName: Yup.string().required('Display Name is required'),
+  displayName: Yup.string()
+    .min(1, 'Display Name must be at least 1 characters')
+    .max(100, 'Display Name must be at most 100 characters')
+    .required('Display Name is required'),
   cardID: Yup.string()
     .matches(/^[A-Za-z0-9]*$/, 'Please enter valid Card ID')
-    .min(1)
-    .max(20)
-    .required('CardID is required'),
+    .min(1, 'Card ID must be at least 1 characters')
+    .max(20, 'Card ID must be at most 20 characters')
+    .required('Card ID is required'),
   password: Yup.string().required('Password is required'),
 });
 

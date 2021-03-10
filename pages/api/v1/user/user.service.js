@@ -51,3 +51,24 @@ export const getUserByUsername = async (username) => {
 
   return user;
 };
+
+export const getUserByCardID = async (cardID) => {
+  const user = await Users.findOne({
+    where: { cardID },
+    attributes: [
+      'username',
+      'displayName',
+      'tiktok',
+      'facebook',
+      'instagram',
+      'twitter',
+      'cardID',
+      'aboutMe',
+    ],
+  });
+  if (!user) {
+    throw new Error("User doesn't exists");
+  }
+
+  return user;
+};
