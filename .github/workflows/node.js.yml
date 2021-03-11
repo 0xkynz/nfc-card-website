@@ -26,17 +26,17 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Add SSH key
-              env:
-                  SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-              run: |
-                  mkdir -p /home/runner/.ssh
-                  # Replace example.com with the hostname of the machine
-                  # you're SSH-ing into
-                  ssh-keyscan example.com >> /home/runner/.ssh/known_hosts
-                  # DOKKU_SSH_KEY is the name of the repository secret
-                  echo "${{ secrets.VNAME_SSH_KEY }}" > /home/runner/.ssh/github_actions
-                  chmod 600 /home/runner/.ssh/github_actions
-                  ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-                  ssh-add /home/runner/.ssh/github_actions
+        env:
+            SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+            mkdir -p /home/runner/.ssh
+            # Replace example.com with the hostname of the machine
+            # you're SSH-ing into
+            ssh-keyscan example.com >> /home/runner/.ssh/known_hosts
+            # DOKKU_SSH_KEY is the name of the repository secret
+            echo "${{ secrets.VNAME_SSH_KEY }}" > /home/runner/.ssh/github_actions
+            chmod 600 /home/runner/.ssh/github_actions
+            ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+            ssh-add /home/runner/.ssh/github_actions
       - run: npm ci
       - run: npm run build --if-present
