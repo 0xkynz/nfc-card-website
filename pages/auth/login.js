@@ -31,9 +31,7 @@ export default function Login() {
           setToken(token);
           window.location.href = '/user/settings';
         })
-        .catch(() => {
-          alert('Please check your username or password');
-        })
+        .catch(() => {})
         .finally(() => {
           setSubmitting(false);
         });

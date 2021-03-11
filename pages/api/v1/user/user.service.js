@@ -1,10 +1,10 @@
-import { Users } from '../../../../db/models';
+import { users } from '../../../../db/models';
 
 export const updateUser = async (
   id,
   { email, displayName, aboutMe, tiktok, facebook, twitter, instagram }
 ) => {
-  const newUser = await Users.update(
+  const newUser = await users.update(
     {
       email,
       displayName,
@@ -23,7 +23,7 @@ export const updateUser = async (
 };
 
 export const getUser = async (id) => {
-  const user = await Users.findByPk(id);
+  const user = await users.findByPk(id);
   if (!user) {
     throw new Error("User doesn't exists");
   }
@@ -32,7 +32,7 @@ export const getUser = async (id) => {
 };
 
 export const getUserByUsername = async (username) => {
-  const user = await Users.findOne({
+  const user = await users.findOne({
     where: { username },
     attributes: [
       'username',
@@ -53,7 +53,7 @@ export const getUserByUsername = async (username) => {
 };
 
 export const getUserByCardID = async (cardID) => {
-  const user = await Users.findOne({
+  const user = await users.findOne({
     where: { cardID },
     attributes: [
       'username',

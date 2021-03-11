@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import bcrypt from 'bcryptjs';
 
-import { Users, Cards } from '../../../../db/models';
+import { users, cards } from '../../../../db/models';
 import { generateToken } from '../../../../utils/token';
 
 export const signin = async (email, password) => {
@@ -10,7 +10,7 @@ export const signin = async (email, password) => {
   }
 
   /* Check user in database */
-  const user = await Users.findOne({
+  const user = await users.findOne({
     where: { email },
     attributes: ['id', 'email', 'password'],
     limit: 1,
@@ -45,11 +45,11 @@ export const signup = async (
   cardID,
   { email, password, displayName }
 ) => {
-  const card = await Cards.findByPk(cardID);
+  const card = await cards.findByPk(cardID);
   if (!card) {
     throw new Error('Card does not exist');
   }
-  const user = await Users.findOne({
+  const user = await users.findOne({
     where: { cardID },
     limit: 1,
   });
@@ -57,7 +57,7 @@ export const signup = async (
     throw new Error('Card was used by other account');
   }
 
-  const newUser = await Users.create({
+  const newUser = await users.create({
     username,
     email,
     password,
