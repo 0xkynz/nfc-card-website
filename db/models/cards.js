@@ -1,6 +1,6 @@
 module.exports = function (sequelize, DataTypes) {
   return sequelize.define(
-    'cards',
+    'Cards',
     {
       id: {
         type: DataTypes.STRING(255),

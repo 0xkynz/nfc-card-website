@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 
 module.exports = function (sequelize, DataTypes) {
   return sequelize.define(
-    'users',
+    'Users',
     {
       id: {
         autoIncrement: true,
