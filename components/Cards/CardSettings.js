@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
+import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -11,6 +12,7 @@ const settingSchema = Yup.object().shape({
 });
 
 export default function CardSettings() {
+  const [submitting, setSubmitting] = useState(false);
   const initialValues = {
     displayName: '',
     email: '',
@@ -33,12 +35,17 @@ export default function CardSettings() {
   }, []);
 
   const onSubmit = (values) => {
+    setSubmitting(true);
     userService
       .update(values)
       .then(() => {
-        alert('Update successfully');
+        // alert('Update successfully');
+        toast.success('Updated. Wow so easy!');
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => console.log(err.message))
+      .finally(() => {
+        setSubmitting(false);
+      });
   };
 
   const { username } = user;
@@ -188,8 +195,9 @@ export default function CardSettings() {
                       <button
                         className="bg-gray-800 active:bg-gray-700 text-white font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                         type="submit"
+                        disabled={submitting}
                       >
-                        Save
+                        {submitting ? 'Saving' : 'Save'}
                       </button>
                     </div>
                   </div>

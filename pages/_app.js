@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 import App from 'next/app';
 import Head from 'next/head';
 import Router from 'next/router';
+import { ToastContainer } from 'react-toastify';
 
 import PageChange from 'components/PageChange/PageChange.js';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'assets/styles/tailwind.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 Router.events.on('routeChangeStart', (url) => {
   document.body.classList.add('body-page-transition');
@@ -55,6 +57,17 @@ export default class MyApp extends App {
         </Head>
         <Layout>
           <Component {...pageProps} />
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
         </Layout>
       </React.Fragment>
     );
