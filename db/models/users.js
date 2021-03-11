@@ -70,7 +70,6 @@ module.exports = function (sequelize, DataTypes) {
     },
     {
       sequelize,
-      freezeTableName: true,
       tableName: 'users',
       timestamps: false,
       indexes: [

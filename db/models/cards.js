@@ -14,7 +14,6 @@ module.exports = function (sequelize, DataTypes) {
     },
     {
       sequelize,
-      freezeTableName: true,
       tableName: 'cards',
       timestamps: false,
       indexes: [
