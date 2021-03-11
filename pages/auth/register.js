@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -29,6 +29,7 @@ const registerSchema = Yup.object().shape({
 });
 
 export default function Register() {
+  const [submitting, setSubmitting] = useState(false);
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -38,16 +39,16 @@ export default function Register() {
       displayName: '',
     },
     validationSchema: registerSchema,
-    onSubmit: async (values) => {
+    onSubmit: (values) => {
+      setSubmitting(true);
       register(values)
         .then(({ data }) => {
           const { token } = data;
           setToken(token);
           window.location.href = '/user/settings';
         })
-        .catch((err) => {
-          alert(err.message);
-        });
+        .catch(() => {})
+        .finally(() => setSubmitting(false));
     },
   });
 
@@ -158,7 +159,7 @@ export default function Register() {
                       className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="submit"
                     >
-                      Create Account
+                      {submitting ? 'Creating' : 'Create Account'}
                     </button>
                   </div>
                 </form>

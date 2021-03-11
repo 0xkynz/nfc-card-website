@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import axios from 'axios';
 import { getToken } from './auth';
+import { toast } from 'react-toastify';
 
 // create an axios instance
 const service = axios.create({
@@ -26,6 +27,24 @@ service.interceptors.request.use(
     // do something with request error
     // console.log(error); // for debug
     return Promise.reject(error);
+  }
+);
+
+service.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  function (error) {
+    // Do something with response error
+    if (error.response.status === 400) {
+      const {
+        response: {
+          data: { message },
+        },
+      } = error;
+      toast.error(message);
+    }
+    return Promise.reject(error.response);
   }
 );
 
