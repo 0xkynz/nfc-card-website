@@ -6,8 +6,6 @@ name: Node.js CI
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
   build:
@@ -38,5 +36,5 @@ jobs:
             chmod 600 /home/runner/.ssh/github_actions
             ssh-agent -a $SSH_AUTH_SOCK > /dev/null
             ssh-add /home/runner/.ssh/github_actions
-      - run: npm ci
-      - run: npm run build --if-present
+      - run: |
+            ssh -o "StrictHostKeyChecking no" root@103.130.219.238 "cd ~/website/vname.me; git checkout -f; git pull origin master; npm i; pm2 restart 0"
