@@ -27,4 +27,4 @@ jobs:
         with:
             ssh-private-key: ${{ secrets.VNAME_SSH_KEY }}
       - run: |
-            ssh -o "StrictHostKeyChecking no" root@103.130.219.238 "cd ~/website/vname.me; git checkout -f; git pull origin master; npm i; pm2 restart 0"
+            ssh -o "StrictHostKeyChecking no" root@103.130.219.238 "cd ~/website/vname.me; bash ./deploy.sh"
