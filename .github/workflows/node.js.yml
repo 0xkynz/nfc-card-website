@@ -23,18 +23,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Add SSH key
-        env:
-            SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-        run: |
-            mkdir -p /home/runner/.ssh
-            # Replace example.com with the hostname of the machine
-            # you're SSH-ing into
-            ssh-keyscan example.com >> /home/runner/.ssh/known_hosts
-            # DOKKU_SSH_KEY is the name of the repository secret
-            echo "${{ secrets.VNAME_SSH_KEY }}" > /home/runner/.ssh/github_actions
-            chmod 600 /home/runner/.ssh/github_actions
-            ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-            ssh-add /home/runner/.ssh/github_actions
+      - uses: webfactory/ssh-agent@v0.5.1
+        with:
+            ssh-private-key: ${{ secrets.VNAME_SSH_KEY }}
       - run: |
             ssh -o "StrictHostKeyChecking no" root@103.130.219.238 "cd ~/website/vname.me; git checkout -f; git pull origin master; npm i; pm2 restart 0"
