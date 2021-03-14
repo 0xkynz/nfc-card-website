@@ -7,7 +7,6 @@ import { ToastContainer } from 'react-toastify';
 
 import PageChange from 'components/PageChange/PageChange.js';
 
-import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'assets/styles/tailwind.css';
 import 'react-toastify/dist/ReactToastify.css';
 

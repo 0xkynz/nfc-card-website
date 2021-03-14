@@ -55,7 +55,12 @@ export default function Profile({ user }) {
                 <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
                   <div className="text-center py-6 px-3 mt-32 sm:mt-0">
                     <a target="_blank" rel="noreferrer" href={facebook}>
-                      <i className="fab fa-facebook fa-2x"></i>
+                      <img
+                        src={require('assets/img/facebook-brands.svg')}
+                        width="25"
+                        height="25"
+                        className="inline"
+                      />
                     </a>
                     <a
                       rel="noreferrer"
@@ -63,7 +68,13 @@ export default function Profile({ user }) {
                       target="_blank"
                       className="ml-2"
                     >
-                      <i className="fab fa-instagram fa-2x"></i>
+                      {/* <i className="fab fa-instagram fa-2x"></i> */}
+                      <img
+                        src={require('assets/img/instagram-brands.svg')}
+                        width="25"
+                        height="25"
+                        className="inline"
+                      />
                     </a>
                     <a
                       rel="noreferrer"
@@ -71,7 +82,12 @@ export default function Profile({ user }) {
                       target="_blank"
                       className="ml-2"
                     >
-                      <i className="fab fa-tiktok fa-2x"></i>
+                      <img
+                        src={require('assets/img/tiktok-brands.svg')}
+                        width="25"
+                        height="25"
+                        className="inline"
+                      />
                     </a>
                     <a
                       rel="noreferrer"
@@ -79,7 +95,12 @@ export default function Profile({ user }) {
                       target="_blank"
                       className="ml-2"
                     >
-                      <i className="fab fa-twitter fa-2x"></i>
+                      <img
+                        src={require('assets/img/twitter-brands.svg')}
+                        width="25"
+                        height="25"
+                        className="inline"
+                      />
                     </a>
                   </div>
                 </div>
