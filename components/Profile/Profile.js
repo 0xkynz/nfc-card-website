@@ -57,6 +57,7 @@ export default function Profile({ user }) {
                     <a target="_blank" rel="noreferrer" href={facebook}>
                       <img
                         src={require('assets/img/facebook-brands.svg')}
+                        alt="facebook"
                         width="25"
                         height="25"
                         className="inline"
@@ -71,6 +72,7 @@ export default function Profile({ user }) {
                       {/* <i className="fab fa-instagram fa-2x"></i> */}
                       <img
                         src={require('assets/img/instagram-brands.svg')}
+                        alt="instagram"
                         width="25"
                         height="25"
                         className="inline"
@@ -84,6 +86,7 @@ export default function Profile({ user }) {
                     >
                       <img
                         src={require('assets/img/tiktok-brands.svg')}
+                        alt="tiktok"
                         width="25"
                         height="25"
                         className="inline"
@@ -97,6 +100,7 @@ export default function Profile({ user }) {
                     >
                       <img
                         src={require('assets/img/twitter-brands.svg')}
+                        alt="twitter"
                         width="25"
                         height="25"
                         className="inline"
